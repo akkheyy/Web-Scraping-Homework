@@ -7,7 +7,7 @@ app = Flask(__name__)
 conn = "mongodb://localhost:27017"
 client = pymongo.MongoClient(conn)
 
-db = client.mars_db
+db = client.mars_data
 
 @app.route("/")
 def index():
@@ -18,7 +18,6 @@ def index():
 @app.route("/scrape")
 def scrape():
     mars_data = scrape_mars.scrape() 
-    print(mars_data)
     db.mars_data.insert_one(mars_data)
     return redirect("/")
 

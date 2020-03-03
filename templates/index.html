@@ -1,51 +1,36 @@
 <html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <title>Mission to Mars</title>
     </head>
-
     <body>
-        <!-- title with scrape button -->
         <div class="jumbotron text-center">
             <h1>Mission to Mars</h1>
             <a class="btn btn-primary" href="/scrape" role="button">Scrape</a>
         </div>
-
-        <br>
-
-        <!-- news title with snippet -->
         <div class="container-fluid">
-            <div class="col-8" style="padding: 2%;">
-                <h3>Mars News</h3>
-                <h4>{{ mars_data.news_title }}</h4>
+            <div class="col-8">
+                <h2>Mars News</h2>
+                <h3>{{ mars_data.news_title }}</h3>
                 <p>{{ mars_data.news_p }}</p>
             </div>
         </div>
-
-        <br>
-
-        
         <div class="container-fluid">
-            <!-- featured picture -->
-            <div class="row" id="mars-featured-image">
+            <div class="row">
                 <div class="col-md-8">
-                  <h2>Featured Mars Image</h2>
-                    <!-- if images is False/None/non-existent, then default to error message -->
-                    <img src="{{mars_data.featured_image_url}}" class="img-responsive" width = "100%">
+                  <h2><br/>Featured Mars Image</h2>
+                    <img src= "{{ mars_data.featured_image_url }}" class="img-responsive" width = "100%; height:auto">
                 </div>
                 <div class="col-md-4">
-                  <!-- Mars Weather Mars Facts -->
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <h4>Mars Weather</h4>
-                                <p>{{mars_data.mars_weather}}</p>
+                                <h2>Mars Weather</h2>
+                                <p>{{ mars_data.mars_weather }}</p>
                                 <br>
-                                <h4>Mars Facts</h4>
+                                <h2>Mars Facts</h2>
                                 <div text-align="center">
-                                {{mars_data.mars_table| safe}} 
+                                {{ mars_data.mars_table| safe }} 
                                 </div>
                             </div>
                         </div>
@@ -58,20 +43,18 @@
         </div>
         <br>
         <div class="container-fluid">
-            <h4 class="text-center">Mars Hemispheres</h4>
+            <h2><br/><br/>Mars Hemispheres</h2>
             <hr>
         </div>
         
                 
-        <div class="card-deck">
+        <div class="cards">
             {% for hemisphere in mars_data.hemisphere_image_urls %}
                 <div class="card" style="width: 32rem;">
-                    <div class="thumbnail">
-                        <img src= {{hemisphere["img_url"]}} class="card-img-top" >
+                    <img class="card-img-top" src= "{{ hemisphere.img_url }}" class="img-responsive" width = "100%; height:auto">
                     </div>
                     <div class="card-body">
-                    <h5 class="card-title">{{hemisphere["title"]}}</h5>
-                    </div>
+                        <p class="card-text">{{ hemisphere.title }}</p>
                     <br>
                 </div>
             {% endfor %}
